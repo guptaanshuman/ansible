@@ -1,0 +1,48 @@
+
+The following are the recommended hardware/software requirements for ansible controller:
+ * 4GB RAM
+ * Ubuntu 16.04 or Greater
+ * Minimum 50 GB Hard disk
+ * python 2.7 or greater 
+
+
+To install ansible controller on ubuntu, run below commands:
+
+- $ sudo apt-add-repository ppa:ansible/ansible
+- $ sudo apt-get update
+- $ sudo apt-get install ansible
+
+- $ ansible --version
+
+
+Create Passwordless authentication with managed nodes using below command:
+
+Step 1: Generate a Public/Private Keypair on Your Ansible controller machine:
+
+ssh-keygen -t rsa
+
+Step 2: Upload Your Public Key to Managaed nodes:
+
+ssh-copy-id remote-user@server-ip
+
+Step 3: Add these Hosts on invetory file.
+
+[webserver]
+ansible-node1 ansible_host=35.247.xx.xx  ansible_user=ansible
+
+[dbserver]
+ansible-node2 ansible_host=34.83.xx.xx  ansible_user=ansible
+
+
+Step 4 : Now you can able to access your nodes to verify the node status with ansible run below command:
+
+$ ansible all -m ping
+
+ansible-node2 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
+ansible-node1 | SUCCESS => {
+    "changed": false, 
+    "ping": "pong"
+}
